@@ -1,9 +1,9 @@
 <template>
-	<div @keydown.enter="addItem($event)">
+	<div @keydown.enter="addItem">
 		<input type="text" 
 			placeholder="add some task to do"
 			v-model="input">
-		<button type="submit" @click="addItem(input)">add</button>
+		<button type="submit" @click="addItem">add</button>
 	</div>
 </template>
 
@@ -17,18 +17,18 @@
 		},
 
 		methods: {
-			addItem(event) {
-				this.input = '';
+			addItem() {
+				if (this.input.length) {
 
-				if (typeof event == 'string') {
-					if (event.length < 50) { 
-						this.$emit('add-item', event);
+					if (this.input.length < 50) {
+						this.$emit('add-item', this.input)
 					} else {
 						alert('Hey, this note is too long')
 					}
-				} else {
-					this.$emit('keydown', event)
+
 				}
+
+				this.input = '';
 			}
 		}
 	}

@@ -4,9 +4,7 @@
             <header>
                 <h1>ToDo <span>App</span></h1>
             </header>
-            <add 
-                @add-item="addItem"
-                @keydown="addItem($event.target.value)"/>
+            <add @add-item="addItem"/>
             <list :todos="todos" 
                 @delete-item="deleteItem"/>
         </div>  
@@ -35,13 +33,14 @@ export default {
         },
 
         addItem(text) {
-            if (text.length) {
+            /*if (text.length) {
                 if (text.length < 50) {
                     this.todos.push(text);
                 } else {
                     alert('Hey, this note is too long')
                 }
-            }
+            }*/
+            this.todos.push(text);
             //else console.log("but you wrote nothing!")
         }
     }

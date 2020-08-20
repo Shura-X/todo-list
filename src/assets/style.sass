@@ -1,0 +1,28 @@
+$green: #48f542
+$grey: #b5b5b5
+$black: #3d3d3d //#2e2e2e
+
+@mixin font($color, $size)
+	font-family: 'Roboto',
+	color: $color,
+	font-size: $size + px
+
+%btn
+	background-color: transparent
+	border: 2px solid $grey
+	border-radius: 10px
+	padding: 5px 5px
+
+	@include font($black, 18)
+
+	&:focus
+		outline: none
+
+%focus
+	&:hover
+		border-color: $green
+
+	&:active
+		border-color: white
+		color: white
+		background-color: $green

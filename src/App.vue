@@ -1,6 +1,9 @@
 <template>
     <div id="app">
         <div class="wrapper">
+            <header>
+                <h1>ToDo <span>App</span></h1>
+            </header>
             <add 
                 @add-item="addItem"
                 @keydown="addItem($event.target.value)"/>
@@ -47,6 +50,8 @@ export default {
 
 
 <style lang="sass">
+    @import './assets/style.sass'
+
     #app
         width: 100%
         height: 100%
@@ -54,4 +59,23 @@ export default {
         display: flex
         justify-content: center
         align-items: center
+
+    .wrapper
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+
+    header
+        width: 100%
+        display: flex
+        justify-content: center
+
+    h1
+        font-family: 'Roboto'
+        color: $black
+        font-size: 36px
+        font-weight: 500
+
+        span
+            color: $green
 </style>

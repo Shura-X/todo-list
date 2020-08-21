@@ -1,22 +1,29 @@
 <template>
-	<ul>
-		<li v-for="(message, index) in todos" :key="index">
-			<p>{{ message }}</p>
-			<button @click="deleteItem(index)">delete</button>
+	<!--<ul>
+		<transition-group name="item" mode="out-in">
+			<li v-for="(message, index) in todos" :key="index">
+				<p>{{ message }}</p>
+				<button @click="deleteItem(index)">delete</button>
+			</li>
+		</transition-group>
+	</ul>-->
+
+	<!--due to the old bug with transition-group,
+		i can't just deconstruct each item in v-for
+		and remove items by their index, so i added
+		id field-->
+	<transition-group tag="ul" name="item">
+		<li v-for="item in todos" :key="item.id">
+			<p>{{ item.message }}</p>
+			<button @click="$emit('remove-item', item.id)">remove</button>
 		</li>
-	</ul>
+	</transition-group>
 </template>
 
 
 <script>
 	export default {
-		props: ['todos'],
-
-		methods: {
-			deleteItem(index) {
-				this.$emit('delete-item', index);
-			}
-		}
+		props: ['todos']
 	}
 </script>
 
@@ -59,4 +66,18 @@
 	button
 		@extend %btn
 		@extend %focus
+
+	.item-enter-active,
+	.item-leave-active
+		transition: all .5s
+
+		p, button
+			transition: all .5s
+
+	.item-enter,
+	.item-leave-to
+		opacity: 0
+
+		p, button
+			transform: translate(50px)
 </style>

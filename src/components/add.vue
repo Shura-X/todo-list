@@ -17,6 +17,8 @@
 		},
 
 		methods: {
+			/*this handler takes data from 'input' model
+			and emits it up to the outer event handler*/
 			addItem() {
 				if (this.input.length) {
 

@@ -5,8 +5,8 @@
                 <h1>ToDo <span>App</span></h1>
             </header>
             <add @add-item="addItem"/>
-            <list :todos="todos" 
-                @delete-item="deleteItem"/>
+            <list :todos="todos"
+                @remove-item="removeItem"/>
         </div>  
     </div> 
 </template>
@@ -23,25 +23,35 @@ export default {
 
     data() {
         return {
-            todos: []
+            todos: [],
+            curr_index: 0 //index of the last item + one
+            //to assign 'number' value to the new item
         }
     },
 
     methods: {
-        deleteItem(index) {
-            this.todos.splice(index, 1)
+        //here the method receives the 'id' of the item
+        //to remove and detects this item by the prop 
+        removeItem(index) {
+            this.todos = this.todos.filter(item => {
+                return index != item.id
+            })
+
+            //now we check if the list is empty, and then
+            //reset this.curr_indext if it is
+            if (!this.todos.legnth) {
+                this.curr_index = 0;
+            }
         },
 
         addItem(text) {
-            /*if (text.length) {
-                if (text.length < 50) {
-                    this.todos.push(text);
-                } else {
-                    alert('Hey, this note is too long')
-                }
-            }*/
-            this.todos.push(text);
-            //else console.log("but you wrote nothing!")
+            this.todos.push({
+                //push new item, we increase the 'id' of the next item
+                id: this.curr_index++,
+                message: text
+            });
+
+            console.log(this.todos)
         }
     }
 }
@@ -77,4 +87,12 @@ export default {
 
         span
             color: $green
+
+    .list-enter-active,
+    .list-leave-active
+        transition: all 1s
+
+    .list-enter,
+    .list-leave-to
+        opacity: 0
 </style>

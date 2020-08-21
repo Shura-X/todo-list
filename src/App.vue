@@ -39,9 +39,12 @@ export default {
 
             //now we check if the list is empty, and then
             //reset this.curr_indext if it is
-            if (!this.todos.legnth) {
+            if (!this.todos.length) {
                 this.curr_index = 0;
             }
+
+            //console.log(this.curr_index);
+            //console.log('todos length: ', this.todos.length);
         },
 
         addItem(text) {
@@ -51,7 +54,8 @@ export default {
                 message: text
             });
 
-            console.log(this.todos)
+            //console.log(this.curr_index);
+            //console.log('todos length: ', this.todos.length);
         }
     }
 }

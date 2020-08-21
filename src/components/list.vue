@@ -80,4 +80,7 @@
 
 		p, button
 			transform: translate(50px)
+
+	.item-move
+		transition: all .5s
 </style>
